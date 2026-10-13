@@ -113,8 +113,18 @@ FROM parks_and_recreation.employee_demographics
 GROUP BY gender
 HAVING AVG(age) > 40; -- aggregate function is used with GROUP BY first then comes HAVING condition
 
+-- Using Both WHERE and HAVING in a Single Query
+
 SELECT occupation, AVG(salary)
 FROM parks_and_recreation.employee_salary
 WHERE occupation LIKE '%manager%'	-- WHERE clause is filtering raw table values rather than an aggregate calculation
 GROUP BY occupation
 HAVING AVG(salary) > 75000;
+
+#### **Summary Comparison Table**
+
+-- | Feature             | `WHERE` Clause                     | `HAVING` Clause                        |
+-- | ------------------- | ---------------------------------- | -------------------------------------- |
+-- | Filter Target       | Individual raw rows                | Aggregated summary groups              |
+-- | Execution Timing    | Applied before `GROUP BY`          | Applied **after** `GROUP BY`           |
+-- | Aggregate Functions | Cannot contain aggregate functions | Designed to filter aggregate functions |
