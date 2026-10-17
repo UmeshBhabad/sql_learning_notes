@@ -3,16 +3,16 @@
 -- A View in SQL is a virtual table defined by a underlying `SELECT` query. Unlike physical tables, a view does not store data on disk itself;
 -- instead, it dynamically retrieves and displays fresh data from the base tables whenever it is queried.
 
--- ###  1. Why Use Views?
+-- ### 1. Why Use Views?
 
 -- Hiding Data Complexity: Simplifies complex queries involving multiple `JOIN`s, `GROUP BY` aggregations, or conditional logic so end users don't have to write them repeatedly.
 -- Restricting Data Access (Security): Enhances database security by restricting access to sensitive columns (like salaries or SSNs) or specific rows.
 -- Data Consistency: Ensures standardized calculations and business logic across different teams and applications.
 -- Renaming Columns: Allows renaming raw table columns into user-friendly aliases without altering underlying base table schemas.
 
--- ###2. Basic Syntax
+-- ### 2. Basic Syntax
 
--- CREATE VIEW ciew_name AS
+-- CREATE VIEW view_name AS
 	-- SELECT column1, column2
 	-- FROM table_name
 	-- WHERE condition;
@@ -71,3 +71,11 @@ SELECT * FROM department_salary_stats;
 -- 4. Modifying or Dropping Views
 
 DROP VIEW IF EXISTS employee_full_details;
+
+-- 5. Summary Comparison: CTEs vs. Temp Tables vs. Views
+
+-- | Feature          | Common Table Expression (CTE)                     | Temporary Table                                     | View                                    			   |
+-- | ---------------- | ------------------------------------------------- | --------------------------------------------------- | ---------------------------------------------------- |
+-- | Storage Type     | No physical storage (inline subquery block)       | Session-bound memory/disk storage              	 	| Stored database definition (no physical data stored) |
+-- | Lifecycle Scope  | Exists only during the single executing statement | Persists until the database session/connection ends | Permanent schema object until explicitly dropped     |
+-- | Primary Use Case | Improving subquery readability and modular logic  | Staging complex multi-step transformations          | Security abstraction and reusable query shortcuts    |
